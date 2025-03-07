@@ -35,12 +35,12 @@ const navigation = [
   // { label: "Approve Event", route: "/approve-event", iconPath: approve },
   // { label: "Complains", route: "/complains", iconPath: complain },
   { label: "Order History", route: "/order-history", iconPath: order },
-  { label: "Add Video", route: "/add-video", iconPath: addVideo },
-  { label: "All Videos", route: "/all-videos", iconPath: allVideo },
-  { label: "All Reports", route: "/all-reports", iconPath: report },
-  { label: "Change Banner", route: "/change-banner", iconPath: banner },
-  { label: "Add Coupon", route: "/add-coupon", iconPath: coupon },
-  { label: "All Coupon", route: "/all-coupon", iconPath: coupon },
+  // { label: "Add Video", route: "/add-video", iconPath: addVideo },
+  // { label: "All Videos", route: "/all-videos", iconPath: allVideo },
+  // { label: "All Reports", route: "/all-reports", iconPath: report },
+  // { label: "Change Banner", route: "/change-banner", iconPath: banner },
+  // { label: "Add Coupon", route: "/add-coupon", iconPath: coupon },
+  // { label: "All Coupon", route: "/all-coupon", iconPath: coupon },
 ];
 
 const NavbarSlider = ({ isOpen, toggleSidebar }: SidebarProps) => {

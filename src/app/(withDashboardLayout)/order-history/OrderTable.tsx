@@ -11,12 +11,19 @@ import Image from 'next/image';
 
 interface Order {
     id: string;
-    userId: string;
+    paymentId: string;
     status: string;
-    totalAmount: number;
-    items: { quantity: number, name: string, image: string, size: string }[];
+    totalPrice: number;
+    items: item[];
+    info : any
     createdAt?: string;
     billingAddress?: string;
+}
+
+interface item {
+    quantity: string,
+    size: string,
+    productDetails: { quantity: number, name: string, thumbnailImage: string, color: string, size: string }
 }
 
 interface OrderTableProps {
@@ -24,12 +31,15 @@ interface OrderTableProps {
     isLoading: boolean;
 }
 
-const OrderModal = ({ order, userData, onClose }: { order: Order; userData: any; onClose: () => void }) => {
+const OrderModal = ({ order, userData, onClose }: { order: Order; userData?: any; onClose: () => void }) => {
     if (typeof window === "undefined") return null;
+
+    console.log(order?.items[0]?.productDetails?.thumbnailImage);
+
 
     return createPortal(
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white p-6 rounded-lg w-[90%] max-w-md">
+            <div className="bg-white p-6 rounded-lg w-[90%] max-w-2xl">
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="text-2xl font-bold">Order Details</h2>
                     <button
@@ -43,23 +53,21 @@ const OrderModal = ({ order, userData, onClose }: { order: Order; userData: any;
                     <h1 className='text-xl font-semibold '>Products:</h1>
                     {
                         order?.items.map((item, idx) =>
-                            <div key={idx} className='grid grid-cols-4 border p-2 rounded-lg'>
-                                <Image width={70} height={45} className='my-auto object-cover mx-auto rounded-lg' src={item?.image} alt='Product Image'></Image>
-                                <p className='font-semibold w-full my-auto'>{item?.name}</p>
+                            <div key={idx} className='grid grid-cols-3 border p-2 rounded-lg'>
+                                <Image width={70} height={45} className='my-auto md:w-24 md:h-20  object-cover mx-auto rounded-lg' src={item?.productDetails?.thumbnailImage} alt='Product Image'></Image>
+                                <p className='font-semibold w-full my-auto'>{item?.productDetails?.name}</p>
+                                <p className='font-semibold w-full my-auto'><span className='font-semibold'>Color: </span><br />{item?.productDetails?.color}</p>
                                 <p className='font-semibold text-center my-auto'><span className='font-semibold'>Size: </span><br />{item?.size}</p>
                                 <p className='my-auto text-center'><span className=' font-semibold'>Quantity</span> <br />{item?.quantity}</p>
                             </div>)
                     }
                 </div>
                 <ModalData
-                    address={order?.billingAddress}
-                    userInfo={{
-                        name: userData?.firstName,
-                        email: userData?.email,
-                    }}
+                    address={order?.info}
+
                 />
                 <div className="mt-4 space-y-2">
-                    <p><span className="font-semibold">Payment Amount:</span> ${order.totalAmount.toFixed(2)}</p>
+                    <p><span className="font-semibold">Payment Amount:</span> ${order.totalPrice.toFixed(2)}</p>
                     <p><span className="font-semibold">Date:</span> {new Date(order.createdAt || '').toLocaleDateString()}</p>
                 </div>
             </div>
@@ -69,7 +77,8 @@ const OrderModal = ({ order, userData, onClose }: { order: Order; userData: any;
 };
 
 const OrderRow = ({ order }: { order: Order }) => {
-    const { data: userData } = useSingleUserQuery(order.userId);
+
+    console.log(order, "paise");
     const [updateOrderStatus] = useUpdateOrderStatusMutation();
     const [showModal, setShowModal] = useState(false);
 
@@ -91,7 +100,7 @@ const OrderRow = ({ order }: { order: Order }) => {
                 className="border-b text-center"
             >
                 <td className="px-4 text-nowrap py-2">{order?.id}</td>
-                <td className="px-4 text-nowrap py-2">{userData?.firstName}</td>
+                <td className="px-4 text-nowrap py-2">{order?.paymentId}</td>
                 <td className="px-4 text-nowrap py-2">
                     <select
                         value={order.status}
@@ -103,7 +112,7 @@ const OrderRow = ({ order }: { order: Order }) => {
                         <option value="CANCELED">CANCELED</option>
                     </select>
                 </td>
-                <td className="px-4 text-nowrap py-2">${order.totalAmount.toFixed(2)}</td>
+                <td className="px-4 text-nowrap py-2">{order.totalPrice.toFixed(2)}</td>
                 {/* <td className="px-4 text-nowrap py-2">{order.items.reduce((total, item) => total + item.quantity, 0)}</td> */}
                 <td className="px-4 text-nowrap py-2">
                     <button
@@ -117,7 +126,7 @@ const OrderRow = ({ order }: { order: Order }) => {
             {showModal && (
                 <OrderModal
                     order={order}
-                    userData={userData}
+                    // userData={userData}
                     onClose={() => setShowModal(false)}
                 />
             )}
@@ -147,7 +156,7 @@ const OrderTable = ({ orders, isLoading }: OrderTableProps) => {
                             </td>
                         </tr>
                     ) : (
-                        orders?.data?.map((order: Order) => (
+                        orders?.map((order: Order) => (
                             <OrderRow key={order.id} order={order} />
                         ))
                     )}

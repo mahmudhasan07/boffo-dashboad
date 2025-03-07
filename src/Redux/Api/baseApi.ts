@@ -17,7 +17,7 @@ export const baseApi = createApi({
     endpoints: (build) => ({
         getOrders: build.query({
             query: ({ id, limit, page }) => ({
-                url: id ? `/orders?id=${id}` : `/orders?limit=${limit}&page=${page}`,
+                url: id ? `/orders?id=${id}` : `/order?limit=${limit}&page=${page}`,
                 method: 'GET',
             }),
             providesTags: ['allOrders'],

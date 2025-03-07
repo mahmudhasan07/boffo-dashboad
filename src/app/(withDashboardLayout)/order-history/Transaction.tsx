@@ -11,11 +11,11 @@ const Transaction = () => {
         selectFromResult: ({ data, isLoading }) => ({
             result: data?.data,
             loading: isLoading,
-            pages: data?.data?.meta?.total
+            pages: data?.meta?.totalPage
         })
     });
 
-    const button = result && [...Array(Math.ceil(pages / limit)).keys()];
+    const button = result && [...Array(Math.ceil(pages)).keys()];
 
     // console.log(Math.ceil(pages / limit));
     
