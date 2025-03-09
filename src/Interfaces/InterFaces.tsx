@@ -17,5 +17,5 @@ export interface ProductInterFace {
     productImage: string
     thumbnailImage: string
     stock: number
-    isFeatured: boolean
+    isFeature: boolean
 }

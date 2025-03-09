@@ -118,8 +118,8 @@ const ProductTable = ({
               >
                 <td className="mx-auto text-center">
                   <input
-                    onChange={() => handleFeature(item?.id, item?.isFeatured)}
-                    defaultChecked={item?.isFeatured ? true : false}
+                    onChange={() => handleFeature(item?.id, item?.isFeature)}
+                    defaultChecked={item?.isFeature ? true : false}
                     type="checkbox"
                     className=""
                   />

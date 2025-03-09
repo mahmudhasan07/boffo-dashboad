@@ -48,7 +48,7 @@ const productApi = baseApi.injectEndpoints({
         }),
         orderStatus: build.mutation({
             query: ({ id, status }) => ({
-                url: `/orders/${id}`,
+                url: `/order/status/${id}`,
                 method: "PATCH",
                 body: status
             }),
@@ -57,8 +57,8 @@ const productApi = baseApi.injectEndpoints({
         updateFeatures: build.mutation({
             query: ({ id, features }) => (
                 {
-                    url: `/products/${id}`,
-                    method: "PUT",
+                    url: `/product/isFeature/${id}`,
+                    method: "PATCH",
                     body: { isFeatured: features }
                 }),
             invalidatesTags: ['allProducts']
