@@ -16,6 +16,7 @@ interface Order {
   totalPrice: number;
   items: item[];
   info: any;
+  paymentType: string;
   createdAt?: string;
   billingAddress?: string;
 }
@@ -146,7 +147,7 @@ const OrderRow = ({ order }: { order: Order }) => {
           </select>
         </td>
         <td className="px-4 text-nowrap py-2">{order.totalPrice.toFixed(2)}</td>
-        {/* <td className="px-4 text-nowrap py-2">{order.items.reduce((total, item) => total + item.quantity, 0)}</td> */}
+        <td className="px-4 text-nowrap py-2">{order.paymentType}</td>
         <td className="px-4 text-nowrap py-2">
           <button
             onClick={() => setShowModal(true)}
@@ -177,7 +178,7 @@ const OrderTable = ({ orders, isLoading }: OrderTableProps) => {
             <th className="px-4 py-2 border">User Name</th>
             <th className="px-4 py-2 border">Status</th>
             <th className="px-4 py-2 border">Total Amount</th>
-            {/* <th className="px-4 py-2 border">Number of Items</th> */}
+            <th className="px-4 py-2 border">Payment Type</th>
             <th className="px-4 py-2 border">Actions</th>
           </tr>
         </thead>
