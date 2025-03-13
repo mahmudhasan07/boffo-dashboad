@@ -1,11 +1,11 @@
 {
-  "name": "Boffo-Backend",
+  "name": "boffo-dashboard",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start -p 6797",
+    "start": "next start -p 3005",
     "lint": "next lint",
     "vercel-build": "npm rebuild sharp && npm run build"
   },
