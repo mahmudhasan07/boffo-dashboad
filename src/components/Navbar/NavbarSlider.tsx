@@ -29,6 +29,7 @@ interface SidebarProps {
 const navigation = [
   { label: "Dashboard", route: "/", iconPath: dashboard },
   { label: "Users", route: "/users", iconPath: users },
+  { label: "Add Category", route: "/add-category", iconPath: coupon },
   { label: "Add Product", route: "/add-product", iconPath: addProduct },
   { label: "All Product", route: "/all-products", iconPath: delivery },
   // { label: "Running Event", route: "/running-event", iconPath: event },
@@ -39,7 +40,6 @@ const navigation = [
   // { label: "All Videos", route: "/all-videos", iconPath: allVideo },
   // { label: "All Reports", route: "/all-reports", iconPath: report },
   // { label: "Change Banner", route: "/change-banner", iconPath: banner },
-  // { label: "Add Coupon", route: "/add-coupon", iconPath: coupon },
   // { label: "All Coupon", route: "/all-coupon", iconPath: coupon },
 ];
 

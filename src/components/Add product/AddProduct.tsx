@@ -23,6 +23,10 @@ const schema = z.object({
     .number({ invalid_type_error: "Price must be a number" })
     .default(0)
     .optional(),
+  stock: z
+    .number({ invalid_type_error: "Stock must be a number" })
+    .default(0)
+    .optional(),
   status: z.string().default("ACTIVE"),
   size: z.string().optional(),
   color: z.string().optional(),
@@ -77,6 +81,7 @@ export default function AddProduct() {
       size: "",
       gender: "",
       price: 0,
+      stock: 0,
       description: "",
       status: "ACTIVE",
     },
@@ -108,6 +113,8 @@ export default function AddProduct() {
       ? data.size.split(",").map((s) => s.trim())
       : [];
     const productData = { ...data, size: sizeArray };
+    console.log(productData);
+    
 
     formData.append("bodyData", JSON.stringify(productData));
 
@@ -372,6 +379,18 @@ export default function AddProduct() {
               />
               {errors.price && (
                 <p className="text-red-500">{errors.price.message}</p>
+              )}
+            </div>
+            <div>
+              <label className="text-[17px] leading-6">Stock</label>
+              <input
+                {...register("stock", { valueAsNumber: true })}
+                placeholder="Stock"
+                type="number"
+                className="p-3 border border-gray-300 rounded-lg w-full"
+              />
+              {errors.stock && (
+                <p className="text-red-500">{errors.stock.message}</p>
               )}
             </div>
           </div>

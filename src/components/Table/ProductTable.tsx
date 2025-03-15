@@ -97,7 +97,7 @@ const ProductTable = ({
             <th className="px-4 py-2 border">Title</th>
             <th className="px-4 py-2 border">Category</th>
             <th className="px-4 py-2 border">Price</th>
-            {/* <th className="px-4 py-2 border">Stock</th> */}
+            <th className="px-4 py-2 border">Stock</th>
             <th className="px-4 py-2 border">Actions</th>
           </tr>
         </thead>
@@ -139,7 +139,7 @@ const ProductTable = ({
                 </td>
                 <td className="px-4 text-nowrap py-2">{item?.category}</td>
                 <td className="px-4 text-nowrap py-2">${item?.price}</td>
-                {/* <td className="px-4 text-nowrap py-2">{item?.stock}</td> */}
+                <td className="px-4 text-nowrap py-2">{item?.stock}</td>
                 <td className="px-4 text-nowrap py-2 space-x-2">
                   <button
                     onClick={() => handleEdit(item.id)}
