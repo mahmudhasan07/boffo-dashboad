@@ -19,22 +19,22 @@ const productApi = baseApi.injectEndpoints({
         }),
         deleteProduct: build.mutation({
             query: (id) => ({
-                url: `/products/${id}`,
+                url: `/product/${id}`,
                 method: "DELETE"
             }),
             invalidatesTags: ["allProducts"]
         }),
         singleProduct: build.query({
             query: (id) => ({
-                url: `/products/${id}`,
+                url: `/product/${id}`,
                 method: "GET"
             }),
             providesTags: ["allProducts"]
         }),
         updateProduct: build.mutation({
             query: ({ id, data }) => ({
-                url: `/products/${id}`,
-                method: "PUT",
+                url: `/product/${id}`,
+                method: "PATCH",
                 body: data
             }),
             invalidatesTags: ["allProducts"]

@@ -138,7 +138,7 @@ const ProductTable = ({
                   {item?.name}
                 </td>
                 <td className="px-4 text-nowrap py-2">{item?.category}</td>
-                <td className="px-4 text-nowrap py-2">${item?.price}</td>
+                <td className="px-4 text-nowrap py-2">tk.{item?.price}</td>
                 <td className="px-4 text-nowrap py-2">{item?.stock}</td>
                 <td className="px-4 text-nowrap py-2 space-x-2">
                   <button

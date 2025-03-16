@@ -18,8 +18,8 @@ const schema = z.object({
     .number({ invalid_type_error: 'Stock must be a number' })
     .nonnegative('Stock must be a non-negative number'),
 
-  discountPrice: z.number()
-    .nonnegative('Stock must be a non-negative number').optional(),
+    discount: z.number()
+    .nonnegative('discount must be a non-negative number').optional(),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -44,7 +44,7 @@ export default function UpdateProduct() {
       reset({
         price: productData.data.price,
         stock: productData.data.stock,
-        discountPrice: productData.data.discountPrice,
+        discount: productData.data.discount || 0,
       });
     }
   }, [productData, reset]);
@@ -52,13 +52,17 @@ export default function UpdateProduct() {
 
 
   const onSubmit = async (data: FormData) => {
+
+    console.log(data);
+    
+
     try {
       const response = await updateProduct({
         id,
         data: {
           price: data.price,
           stock: data.stock,
-          discountPrice: data?.discountPrice
+          discount: data?.discount
         },
       });
 
@@ -91,13 +95,13 @@ export default function UpdateProduct() {
           <div className="space-y-4">
             <div className="relative w-full h-60 border border-gray-300 rounded-lg overflow-hidden">
               <Image
-                src={productData.data.thumbnail}
-                alt={productData.data.title}
+                src={productData.data.thumbnailImage}
+                alt={productData.data.name}
                 fill
                 className="object-cover"
               />
             </div>
-            <h2 className="text-xl font-semibold">{productData.data.title}</h2>
+            <h2 className="text-xl font-semibold">{productData.data.name}</h2>
           </div>
 
           <div className="space-y-4">
@@ -116,7 +120,7 @@ export default function UpdateProduct() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Price ($)
+                Price
               </label>
               <input
                 {...register('price', { valueAsNumber: true })}
@@ -149,14 +153,14 @@ export default function UpdateProduct() {
               Discount Price
             </label>
             <input
-              {...register('discountPrice', { valueAsNumber: true })}
+              {...register('discount', { valueAsNumber: true })}
               type="number"
               // onChange={(e) => handleChange(parseFloat(e.target.value))}
               placeholder='enter the number of percentage'
               className="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-1 focus:ring-primary focus:border-transparent"
             />
-            {errors.stock && (
-              <p className="mt-1 text-red-500 text-sm">{errors.stock.message}</p>
+            {errors.discount && (
+              <p className="mt-1 text-red-500 text-sm">{errors.discount.message}</p>
             )}
           </div>
           {/* <p className='text-gray-600'>New price will be : {newPrice}</p> */}
