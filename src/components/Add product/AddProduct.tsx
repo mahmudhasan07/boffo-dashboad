@@ -144,6 +144,8 @@ export default function AddProduct() {
       return;
     }
 
+    
+
     const { error, data: res } = await addProductFn(formData);
 
     if (error) {
