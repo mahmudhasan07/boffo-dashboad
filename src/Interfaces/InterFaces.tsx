@@ -11,6 +11,7 @@ export interface UserInterFace {
 export interface ProductInterFace {
     name: string 
     price: number
+    discount: number
     category: string
     inStock: number
     id: string

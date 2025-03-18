@@ -11,8 +11,8 @@ const productApi = baseApi.injectEndpoints({
             invalidatesTags: ["allProducts"]
         }),
         allProducts: build.query({
-            query: () => ({
-                url: `/product`,
+            query: ({page, limit}) => ({
+                url: `/product?page=${page}&limit=${limit}`,
                 method: "GET"
             }),
             providesTags: ["allProducts"]

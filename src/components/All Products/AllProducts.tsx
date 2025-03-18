@@ -8,11 +8,12 @@ const AllProducts = () => {
     const [page, setPage] = useState<number>(1);
     const limit = 10;
 
-    const { result, isLoading } = useAllProductsQuery({ page, limit },
+    const { result, isLoading, totalPages } = useAllProductsQuery({ page, limit },
         {
             selectFromResult: ({ data, isLoading }) => ({
                 result: data?.data,
-                isLoading: isLoading
+                isLoading: isLoading,
+                totalPages : data?.meta?.totalPage
             })
         }
     )
@@ -20,7 +21,7 @@ const AllProducts = () => {
     console.log(result);
     
 
-    const totalPages = result?.meta?.total ? Math.ceil(result.meta.total / limit) : 0;
+    // const totalPages = result?.meta?.total ? Math.ceil(result.meta.total / limit) : 0;
     const buttons = [...Array(totalPages).keys()];
 
     return (
