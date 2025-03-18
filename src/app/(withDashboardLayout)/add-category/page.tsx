@@ -7,11 +7,12 @@ import { ToastContainer } from "react-toastify";
 
 const page = () => {
   const [name, setName] = useState<string>("");
-  const [gender, setGender] = useState<string>("");
+  const [gender, setGender] = useState<string>("MALE");
   const [addCategoryFn] = useAddCategoryMutation()
 
   const handleSubmit = async() => {
     const data = {name, gender}
+
     const { error } = await addCategoryFn(data)
     if (error && "message" in error) {
         ShowToastify({ error: error?.message })
