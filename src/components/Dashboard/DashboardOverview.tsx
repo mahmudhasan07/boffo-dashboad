@@ -11,12 +11,11 @@ export default function DashboardOverview() {
   const [selectedValue, setSelectedValue] = useState<string>('this-month');
   
   const { data: orderData, isLoading } = useGetOrdersQuery("");
-  
-  // Calculate totals
-  const orders = orderData?.data?.data || [];
-  const totalOrders = orderData?.data?.meta?.total || 0;
-  const completedOrders = orders.filter((order: { status: string; }) => order.status === "COMPLETED").length;
-  const pendingOrders = orders.filter((order: { status: string; }) => order.status === "PENDING").length;
+
+  const orders = orderData && orderData?.data || [];
+  const totalOrders = orderData && orderData?.meta?.total || 0;
+  const completedOrders = orderData && orders.filter((order: { status: string; }) => order.status === "COMPLETED").length;
+  const pendingOrders = orderData && orders.filter((order: { status: string; }) => order.status === "PENDING").length;
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedValue(event.target.value);

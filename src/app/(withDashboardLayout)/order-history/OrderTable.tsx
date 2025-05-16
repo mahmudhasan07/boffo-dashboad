@@ -97,8 +97,7 @@ const OrderModal = ({
         <ModalData address={order?.info} />
         <div className="mt-4 space-y-2">
           <p>
-            <span className="font-semibold">Payment Amount:</span> $
-            {order.totalPrice.toFixed(2)}
+            <span className="font-semibold">Payment Amount:</span> Tk. {order.totalPrice.toFixed(2)}
           </p>
           <p>
             <span className="font-semibold">Date:</span>{" "}

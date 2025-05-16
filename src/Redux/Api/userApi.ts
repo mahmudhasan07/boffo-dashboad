@@ -5,7 +5,7 @@ const userApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         singleUser: build.query({
             query: (id) => ({
-                url: `/users/${id}`,
+                url: `/user/${id}`,
                 method: "GET"
             }),
             transformResponse: (response: { data: any }) => response.data,
@@ -23,7 +23,7 @@ const userApi = baseApi.injectEndpoints({
         }),
         allUsers: build.query({
             query: ({ page, limit, email }) => ({
-                url: `/users?page=${page}&limit=${limit}`,
+                url: `/user?page=${page}&limit=${limit}`,
                 method: "GET"
             }),
             providesTags: ["allUsers"]
