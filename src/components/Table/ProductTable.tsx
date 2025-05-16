@@ -114,12 +114,13 @@ const ProductTable = ({
               <motion.tr
                 initial={{ y: 100 * (index + 1), opacity: 0 }}
                 animate={{ y: 0, opacity: 1, transition: { duration: 0.5 } }}
-                key={index}
+                key={serial + index}
                 className="border-b text-center"
               >
                 <td className="mx-auto text-center">
                   <input
                     onChange={() => handleFeature(item?.id, item?.isFeature)}
+                    key={item?.id}
                     defaultChecked={item?.isFeature ? true : false}
                     type="checkbox"
                     className=""
